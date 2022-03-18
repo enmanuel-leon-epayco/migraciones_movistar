@@ -2,7 +2,7 @@
 Para las migraciones se debe deben ejecutar paso a paso los script de elastic search, tal cual en el orden en el que estan presentes en este documento.
 
 
-- 1) Vaciar campo logs_estados para comenzar las migraciones
+- 1) Vaciar campo logs_estados para comenzar las migraciones (Opcional)
 - 2) Actualizar pagado
 - 3) No pagada
 - 4) Archivada
@@ -16,11 +16,11 @@ Para las migraciones se debe deben ejecutar paso a paso los script de elastic se
 ### Vaciar campo logs_estados para comenzar las migraciones
 
 ```json
-PUT recaudo_facturas/_mapping
+POST recaudo_facturas/_update_by_query
 {
   "script": {
     "lang": "painless",
-    "source": "ctx._source.logs_estados = [params.log]",
+    "source": "ctx._source.logs_estados = params.log",
     "params": {
       "log": []
     }
@@ -91,18 +91,6 @@ POST recaudo_facturas/_update_by_query
             }
           }
         }
-      ],
-      "must_not": [
-        {
-          "nested": {
-            "path": "logs_estados",
-            "query": {
-              "exists": {
-                "field": "logs_estados.estado"
-              }
-            }
-          }
-        }
       ]
     }
   }
@@ -145,18 +133,6 @@ POST recaudo_facturas/_update_by_query
           "term": {
             "estado_pago.keyword": {
               "value": "Aceptada"
-            }
-          }
-        }
-      ],
-      "must_not": [
-        {
-          "nested": {
-            "path": "logs_estados",
-            "query": {
-              "exists": {
-                "field": "logs_estados.estado"
-              }
             }
           }
         }
@@ -210,16 +186,6 @@ POST recaudo_facturas/_update_by_query
       ],
       "must_not": [
         {
-          "nested": {
-            "path": "logs_estados",
-            "query": {
-              "exists": {
-                "field": "logs_estados.estado"
-              }
-            }
-          }
-        },
-        {
           "exists": {
             "field": "pagos"
           }
@@ -269,16 +235,6 @@ POST recaudo_facturas/_update_by_query
         }
       ],
       "must_not": [
-        {
-          "nested": {
-            "path": "logs_estados",
-            "query": {
-              "exists": {
-                "field": "logs_estados.estado"
-              }
-            }
-          }
-        },
         {
           "term": {
             "pagos.estado.keyword": {
@@ -340,18 +296,6 @@ POST recaudo_facturas/_update_by_query
             }
           }
         }
-      ],
-      "must_not": [
-        {
-          "nested": {
-            "path": "logs_estados",
-            "query": {
-              "exists": {
-                "field": "logs_estados.estado"
-              }
-            }
-          }
-        }
       ]
     }
   }
@@ -408,16 +352,6 @@ POST recaudo_facturas/_update_by_query
         }
       ],
       "must_not": [
-        {
-          "nested": {
-            "path": "logs_estados",
-            "query": {
-              "exists": {
-                "field": "logs_estados.estado"
-              }
-            }
-          }
-        },
         {
           "exists": {
             "field": "pagos"
