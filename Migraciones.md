@@ -38,9 +38,9 @@ POST recaudo_facturas/_update_by_query
                 },
                 {
                     "range": {
-                        "fecha_real": {
-                            "gte": "2022-01-01T00:00:00-05:00",
-                            "lte": "2022-02-28T23:59:59-05:00"
+                        "fecha": {
+                            "gte": 1640995200,
+                            "lte": 1643673599
                         }
                     }
                 }
@@ -78,9 +78,9 @@ POST recaudo_facturas/_update_by_query
                 },
                 {
                     "range": {
-                        "fecha_real": {
-                            "gte": "2022-01-01T00:00:00-05:00",
-                            "lte": "2022-02-28T23:59:59-05:00"
+                        "fecha": {
+                            "gte": 1640995200,
+                            "lte": 1643673599
                         }
                     }
                 },
@@ -88,6 +88,18 @@ POST recaudo_facturas/_update_by_query
           "term": {
             "pagos.estado.keyword": {
               "value": "Aceptada"
+            }
+          }
+        }
+      ],
+      "must_not":[
+        {
+          "nested": {
+            "path": "logs_estados",
+            "query": {
+              "exists": {
+                "field": "logs_estados.estado"
+              }
             }
           }
         }
@@ -123,9 +135,9 @@ POST recaudo_facturas/_update_by_query
                 },
                 {
                     "range": {
-                        "fecha_real": {
-                            "gte": "2022-01-01T00:00:00-05:00",
-                            "lte": "2022-02-28T23:59:59-05:00"
+                        "fecha": {
+                            "gte": 1640995200,
+                            "lte": 1643673599
                         }
                     }
                 },
@@ -133,6 +145,18 @@ POST recaudo_facturas/_update_by_query
           "term": {
             "estado_pago.keyword": {
               "value": "Aceptada"
+            }
+          }
+        }
+      ],
+      "must_not":[
+        {
+          "nested": {
+            "path": "logs_estados",
+            "query": {
+              "exists": {
+                "field": "logs_estados.estado"
+              }
             }
           }
         }
@@ -170,9 +194,9 @@ POST recaudo_facturas/_update_by_query
                 },
                 {
                     "range": {
-                        "fecha_real": {
-                            "gte": "2022-01-01T00:00:00-05:00",
-                            "lte": "2022-02-28T23:59:59-05:00"
+                        "fecha": {
+                            "gte": 1640995200,
+                            "lte": 1643673599
                         }
                     }
                 },
@@ -188,6 +212,16 @@ POST recaudo_facturas/_update_by_query
         {
           "exists": {
             "field": "pagos"
+          }
+        },
+        {
+          "nested": {
+            "path": "logs_estados",
+            "query": {
+              "exists": {
+                "field": "logs_estados.estado"
+              }
+            }
           }
         }
       ]
@@ -222,9 +256,9 @@ POST recaudo_facturas/_update_by_query
                 },
                 {
                     "range": {
-                        "fecha_real": {
-                            "gte": "2022-01-01T00:00:00-05:00",
-                            "lte": "2022-02-28T23:59:59-05:00"
+                        "fecha": {
+                            "gte": 1640995200,
+                            "lte": 1643673599
                         }
                     }
                 },
@@ -239,6 +273,16 @@ POST recaudo_facturas/_update_by_query
           "term": {
             "pagos.estado.keyword": {
               "value": "Aceptada"
+            }
+          }
+        },
+        {
+          "nested": {
+            "path": "logs_estados",
+            "query": {
+              "exists": {
+                "field": "logs_estados.estado"
+              }
             }
           }
         }
@@ -276,9 +320,9 @@ POST recaudo_facturas/_update_by_query
                 },
                 {
                     "range": {
-                        "fecha_real": {
-                            "gte": "2022-01-01T00:00:00-05:00",
-                            "lte": "2022-02-28T23:59:59-05:00"
+                        "fecha": {
+                            "gte": 1640995200,
+                            "lte": 1643673599
                         }
                     }
                 },
@@ -293,6 +337,18 @@ POST recaudo_facturas/_update_by_query
           "term": {
             "borrado": {
               "value": true
+            }
+          }
+        }
+      ],
+    "must_not": [
+        {
+          "nested": {
+            "path": "logs_estados",
+            "query": {
+              "exists": {
+                "field": "logs_estados.estado"
+              }
             }
           }
         }
@@ -330,9 +386,9 @@ POST recaudo_facturas/_update_by_query
                 },
                 {
                     "range": {
-                        "fecha_real": {
-                            "gte": "2022-01-01T00:00:00-05:00",
-                            "lte": "2022-02-28T23:59:59-05:00"
+                        "fecha": {
+                            "gte": 1640995200,
+                            "lte": 1643673599
                         }
                     }
                 },
@@ -391,9 +447,9 @@ POST recaudo_facturas/_update_by_query
                 },
                 {
                     "range": {
-                        "fecha_real": {
-                            "gte": "2022-01-01T00:00:00-05:00",
-                            "lte": "2022-02-28T23:59:59-05:00"
+                        "fecha": {
+                            "gte": 1640995200,
+                            "lte": 1643673599
                         }
                     }
                 },
